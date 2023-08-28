@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .items{
+        display: flex;
+    }
+    div.item{
+        width: 50%;
+    }
+    .item.first{
+        margin-right: 20px;
+    }
+    div > img{
+        width: 100%;
+    }
+    .thumb {
+        display: flex;
+        margin-top: 20px;
+    }
+    div.thumb > div{
+        width: 20%;
+    }
+    div>a>img{
+        width: 5%;
+    }
+    input{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body onload="init()">
+    <h1>Javascript</h1>
+    <div class="items">
+        <div class="item first">
+            <img src="image/029d39ed7f0a9fcdb0986e7a37881040.jpg" id="mainImg" alt="phone">
+            <div class="thumb">
+                    <div><img src="image/445c33308027e5d2d1303b95a5cc0367.jpg" alt="1"></div>
+                    <div><img src="image/4d1b5acf71fb4b7ec097534ca2e6b283.jpg" alt="2"></div>
+                    <div><img src="image/6962a40b19b8c897e6a2e2ed2e87ff7f.jpg" alt="3"></div>
+                    <div><img src="image/6c583e1615dfbb1f99e821f95e9ee969.jpg" alt="4"></div>
+                    <div><img src="image/813cc4daab36890809c554914620cb83.jpg" alt="5"></div>
+            </div>
+        </div>
+        <div class="item">
+           <h1 id="subject">Dien thoai sam sung</h1>
+           <input 
+                type="text" 
+                placeholder="Enter phone name ..."
+                onchange="changeSubject(this)"
+           >
+           <div class="btn">
+                <a href="#" rel="do_1">
+                    <img src="image/color/do_1.png" alt="">
+                </a>
+                <a href="#" rel="trang_2">
+                    <img src="image/color/trang_2.png" alt="">
+                </a>
+                <a href="#" rel="vang_3">
+                    <img src="image/color/vang_3.png" alt="">
+                </a>
+                <a href="#" rel="xam_4">
+                    <img src="image/color/xam_4.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function init(){
+            var images = document.querySelectorAll("div.thumb img"); //collection
+            // console.log(images);
+            for(var i=0;i<images.length;i++)
+            {
+                images[i].onclick = function(){
+                    var path = this.src;
+                    var mainImg = document.getElementById("mainImg");
+                    mainImg.src = path;
+                }
+            }
+            var buttons = document.querySelectorAll(".btn a");
+            for(var i=0;i<buttons.length;i++)
+            {
+                buttons[i].onclick = function(){
+                    var color = this.getAttribute("rel");
+                    // alert(color);
+                    var mainImg = document.getElementById("mainImg");
+                    mainImg.src = "image/color/"+color+".png"; 
+
+                    var SubImages = document.querySelectorAll(".btn a")
+                    for(var i=0;i<SubImages.length;i++)
+                    {
+                        SubImages[i].src = `image/color/${color}_${i+1}.png`;
+                    }
+
+                }
+            }
+        }
+
+
+       function changeImage(obj)
+       {
+        var path = obj.src;
+        var img = document.getElementById("mainImg"); //object
+        img.src = path;
+        // img.setAttribute("src",path);
+        // 
+        // note:
+        // thay doi noi dung thanh phan html
+        // e.innerHTML = <new-html>
+        //Thay doi gia tri thuoc tinh thanh phan html
+        // e.<attribute> = <value>
+        // e.setAttribute("<attribute>",<value>);
+        
+        //them su kien    
+        
+        }
+        function changeSubject(obj){
+            var subject = document.getElementById("subject");
+            subject.innerText = obj.value;
+        }
+    </script>
+</body>
+</html>

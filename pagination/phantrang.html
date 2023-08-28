@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/paginationjs-master/dist/pagination.css">
+    <!-- bootstrap -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- jquery -->
+   
+</head>
+
+<body>
+    <div class="wrap_page">
+        <div class="data-container">
+
+        </div>
+        <div id="pagination-demo1">
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="public/paginationjs-master/src/pagination.js"></script>
+
+    <script>
+        (function (name) {
+            var container = $('#pagination-' + name);
+            if (!container.length) return;
+            var sources = function () {
+                var mang = ['nam','p1','p2','samsung','thao','iphone','nhung','nam','p1','p2','samsung','thao','iphone','nhung'];
+                var result = [];
+
+                for (var i = 1; i < mang.length; i++) {
+                    result.push(mang[i]+' Tong Nam');
+                }
+
+                return result;
+            }();
+
+            var options = {
+                dataSource: sources,
+                callback: function (response, pagination) {
+                    window.console && console.log(response, pagination);
+
+                    var dataHtml = '<div class="pagination_wrap">';
+
+                    $.each(response, function (index, item) {
+                        dataHtml += '<div class="pagination_child">' + item + '</div>';
+                    });
+
+                    dataHtml += '</div>';
+
+                    container.prev().html(dataHtml);
+                }
+            };
+
+            //$.pagination(container, options);
+
+            container.addHook('beforeInit', function () {
+                window.console && console.log('beforeInit...');
+            });
+            container.pagination(options);
+
+            container.addHook('beforePageOnClick', function () {
+                window.console && console.log('beforePageOnClick...');
+                //return false
+            });
+        })('demo1');
+    </script>
+</body>
+
+</html>

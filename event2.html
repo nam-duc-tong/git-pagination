@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .items{
+            display: flex;
+        }
+        .item{
+            width: 50%;
+            background-color: #fff;
+        }
+        .item>img{
+            width: 100%;
+        }
+        a img{
+            width: 5%;
+        }
+        .thumb{
+            display: flex;
+            margin-top: 20px;
+        }
+        .thumb img{
+            width: 100%;
+        }
+    </style>
+    <script>
+    //    function changeImage(obj){
+    //         var path = obj.src;
+    //         // alert(path);
+    //         var img = document.getElementById("mainImg");
+    //         img.src = path;
+    //    }
+
+
+    function init(){
+        var images = document.querySelectorAll("div.thumb img");
+        for(var i=0;i<images.length;i++)
+        {
+            images[i].onclick = function(){
+                // alert(this.src);
+                var img = document.getElementById("mainImg");
+                img.src = this.src;
+            }
+        }
+        var buttons = document.querySelectorAll(".theaimg a");
+        for(var i=0; i < buttons.length; i++)
+        {
+            buttons[i].onclick = function(){
+                event.preventDefault();
+                var color = this.getAttribute("rel");
+                // alert(color);
+                var img = document.getElementById("mainImg");
+                // console.log(img.src);
+                img.src = `image/color/${color}.png`;
+                
+                var subImages = document.querySelectorAll(".theimg img");
+                for(var i=0;i<subImages.length;i++)
+                {
+                    subImages[i].src =  `image/color/${color}.png`;
+                }
+            }
+        }
+        // console.log(images);
+    }
+    function changeSubject(obj){
+        var subject = document.getElementById("subject");
+        subject.innerHTML = obj.value;
+    }
+    </script>
+    
+</head>
+
+<body  onload="init()">
+    <h1>Javascript</h1>
+    <div class="items">
+        <div class="item">
+            <img src="image/029d39ed7f0a9fcdb0986e7a37881040.jpg" id="mainImg" alt="phone">
+            <div class="thumb">
+                <div><img src="image/445c33308027e5d2d1303b95a5cc0367.jpg" alt="1"></div>
+                <div><img src="image/4d1b5acf71fb4b7ec097534ca2e6b283.jpg" alt="2"></div>
+                <div><img src="image/6962a40b19b8c897e6a2e2ed2e87ff7f.jpg" alt="3"></div>
+                <div><img src="image/6c583e1615dfbb1f99e821f95e9ee969.jpg" alt="4"></div>
+                <div><img src="image/813cc4daab36890809c554914620cb83.jpg" alt="5"></div>
+            </div>
+        </div>
+        <div class="item">
+            <h1 id="subject">Dien thoai galaxy s8</h1>
+            <input 
+                type="text"
+                placeholder="Enter Phone Name ... "
+                onchange="changeSubject(this)"    
+            >
+            <p></p>
+            <div class="theaimg">
+                <a href="#" rel="do_1">
+                    <img src="image/color/do_1.png" alt="">
+                </a>
+                <a href="#" rel="trang_2">
+                    <img src="image/color/trang_2.png" alt="">
+                </a>
+                <a href="#" rel="vang_3">
+                    <img src="image/color/vang_3.png" alt="">
+                </a>
+                <a href="#" rel="xam_4">
+                    <img src="image/color/xam_4.png" alt="">
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

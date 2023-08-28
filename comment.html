@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Form</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Comment Form</h2>
+    <form id="comment-form">
+        <div>
+            <label for="name">Họ tên:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+            <label for="content">Nội dung bình luận:</label>
+            <textarea id="content" name="content" rows="4" required></textarea>
+        </div>
+        <div>
+            <button type="submit">Gửi bình luận</button>
+        </div>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#comment-form").submit(function (event) {
+                event.preventDefault();
+
+                var name = $("#name").val();
+                var phone = $("#phone").val();
+                var content = $("#content").val();
+
+                // Replace 'YOUR_SERVER_ENDPOINT' with your actual server endpoint
+                $.post("./ketqua.html", {
+                    name: name,
+                    phone: phone,
+                    content: content
+                }).done(function (data) {
+                    $("#response").html(data);
+                    $("#comment-form")[0].reset();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
